@@ -3272,7 +3272,8 @@ void LibraryTreeView::libraryTreeItemExpanded(LibraryTreeItem *pLibraryTreeItem)
     for (int i = 0; i < pLibraryTreeItem->childrenSize(); i++) {
       LibraryTreeItem *pChildLibraryTreeItem = pLibraryTreeItem->child(i);
       MainWindow::instance()->getStatusBar()->showMessage(QString(Helper::loading).append(": ").append(pChildLibraryTreeItem->getNameStructure()));
-      mpLibraryWidget->getLibraryTreeModel()->loadLibraryTreeItemPixmap(pChildLibraryTreeItem);
+      // Not loading library icon leads to faster library search (faster loading still needs to be implemented)
+      //mpLibraryWidget->getLibraryTreeModel()->loadLibraryTreeItemPixmap(pChildLibraryTreeItem);
       MainWindow::instance()->getStatusBar()->clearMessage();
       MainWindow::instance()->getProgressBar()->setValue(++progressValue);
     }
