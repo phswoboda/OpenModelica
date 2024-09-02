@@ -44,12 +44,12 @@ static const int mmc_thread_data_key = 1;
 #else
 #define OMC_MAIN_THREADDATA_NAME globalThreadData_UnknownModel
 #endif
-DLLDirection extern threadData_t *OMC_MAIN_THREADDATA_NAME;
-static inline void* pthread_getspecific(int key)
-{
-  assert(key==mmc_thread_data_key);
-  return NULL;
-}
+// DLLDirection extern threadData_t *OMC_MAIN_THREADDATA_NAME;
+// static inline void* pthread_getspecific(int key)
+// {
+//   assert(key==mmc_thread_data_key);
+//   return NULL;
+// }
 #endif
 
 DLLDirection extern void mmc_init();
