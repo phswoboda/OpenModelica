@@ -91,12 +91,12 @@ static void waitForStep(volatile omc_opc_ua_state *state)
 {
   int run;
   state->step = 0;
-  pthread_mutex_lock(&state->mutex_pause);
+  pthread_mutex_lock((pthread_mutex_t*) &state->mutex_pause);
   run = state->run;
   while (!(state->run || state->step)) {
-    pthread_cond_wait(&state->cond_pause, &state->mutex_pause);
+      pthread_cond_wait((pthread_cond_t*) &state->cond_pause, (pthread_mutex_t*) &state->mutex_pause);
   }
-  pthread_mutex_unlock(&state->mutex_pause);
+  pthread_mutex_unlock((pthread_mutex_t*) &state->mutex_pause);
   if (!run || state->data->real_time_sync.scaling != state->real_time_sync_scaling) {
     /* We were not running or the scaling factor changed. Reset the real-time synchronization! */
     state->omc_real_time_sync_update(state->data, state->real_time_sync_scaling);
